@@ -62,7 +62,7 @@ export default createProjectSchematic<ComponentOptions>((options, { project, tre
   validateClassName(classifiedName);
   const zoneless = isZonelessApp(project);
 
-  const skipStyleFile = options.inlineStyle || options.style === Style.None;
+  const skipStyleFile = options.inlineStyle || options.style === Style.None || options.skipStyles;
   const templateSource = apply(url('./files'), [
     options.skipTests ? filter((path) => !path.endsWith('.spec.ts.template')) : noop(),
     skipStyleFile ? filter((path) => !path.endsWith('.__style__.template')) : noop(),

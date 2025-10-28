@@ -105,6 +105,11 @@
       "description": "Skip the generation of unit test files `spec.ts`.",
       "default": false
     },
+    "skipStyles": {
+      "type": "boolean",
+      "description": "Skip the generation of stylesheet files.",
+      "default": false
+    },
     "flat": {
       "type": "boolean",
       "description": "Create the component files directly in the project's `src/app` directory instead of creating a new folder for them.",

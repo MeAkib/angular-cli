@@ -31,6 +31,7 @@ describe('Component Schematic', () => {
     export: false,
     project: 'bar',
     ngHtml: false,
+    skipStyles: false,
   };
 
   const workspaceOptions: WorkspaceOptions = {
@@ -222,6 +223,20 @@ describe('Component Schematic', () => {
     expect(content).toMatch(/styles: `/);
     expect(content).not.toMatch(/styleUrl: /);
     expect(tree.files).not.toContain('/projects/bar/src/app/foo/foo.component.css');
+  });
+
+  it('should respect the skipStyles option', async () => {
+    const options = { ...defaultOptions, skipStyles: true };
+    const tree = await schematicRunner.runSchematic('component', options, appTree);
+    const files = tree.files;
+
+    const content = tree.readContent('/projects/bar/src/app/foo/foo.component.ts');
+    expect(content).not.toMatch(/styleUrls: /);
+    expect(content).not.toMatch(/styles: `/);
+
+    expect(files).not.toContain('/projects/bar/src/app/foo/foo.component.css');
+    expect(files).toContain('/projects/bar/src/app/foo/foo.component.html');
+    expect(files).toContain('/projects/bar/src/app/foo/foo.component.ts');
   });
 
   it('should respect the displayBlock option when inlineStyle is `false`', async () => {

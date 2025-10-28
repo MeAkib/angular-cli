@@ -89,6 +89,11 @@
       "default": false,
       "alias": "S"
     },
+    "skipStyles": {
+      "description": "Skip the generation of stylesheet for components.",
+      "type": "boolean",
+      "default": false
+    },
     "skipPackageJson": {
       "type": "boolean",
       "default": false,

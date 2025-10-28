@@ -229,6 +229,14 @@ function addAppToWorkspaceFile(options: ApplicationOptions, appDir: string): Rul
     schematicsWithTests.forEach((type) => {
       ((schematics[`@schematics/angular:${type}`] ??= {}) as JsonObject).skipTests = true;
     });
+
+    if (options.skipStyles) {
+      const schematicsWithStyles = ['component'];
+
+      schematicsWithStyles.forEach((type) => {
+        ((schematics[`@schematics/angular:${type}`] ??= {}) as JsonObject).skipStyles = true;
+      });
+    }
   }
 
   if (!options.standalone) {
@@ -397,6 +405,7 @@ function getComponentOptions(options: ApplicationOptions): Partial<ComponentOpti
         inlineStyle: options.inlineStyle,
         inlineTemplate: options.inlineTemplate,
         skipTests: options.skipTests,
+        skipStyles: options.skipStyles,
         style: options.style as unknown as ComponentStyle,
         viewEncapsulation: options.viewEncapsulation,
       }
@@ -404,6 +413,7 @@ function getComponentOptions(options: ApplicationOptions): Partial<ComponentOpti
         inlineStyle: options.inlineStyle ?? true,
         inlineTemplate: options.inlineTemplate ?? true,
         skipTests: true,
+        skipStyles: true,
         style: options.style as unknown as ComponentStyle,
         viewEncapsulation: options.viewEncapsulation,
       };
